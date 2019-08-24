@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		447F6F562311B72400A4CFC0 /* SelectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F6F552311B72400A4CFC0 /* SelectData.swift */; };
 		44BF284523113D4C00E325DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF284423113D4C00E325DA /* AppDelegate.swift */; };
 		44BF284723113D4C00E325DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF284623113D4C00E325DA /* ViewController.swift */; };
 		44BF284A23113D4C00E325DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44BF284823113D4C00E325DA /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		447F6F552311B72400A4CFC0 /* SelectData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectData.swift; sourceTree = "<group>"; };
 		44BF284123113D4C00E325DA /* Project1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44BF284423113D4C00E325DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44BF284623113D4C00E325DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				44BF284B23113D4D00E325DA /* Assets.xcassets */,
 				44BF284D23113D4D00E325DA /* LaunchScreen.storyboard */,
 				44BF285023113D4D00E325DA /* Info.plist */,
+				447F6F552311B72400A4CFC0 /* SelectData.swift */,
 			);
 			path = Project1;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44BF287023114E4100E325DA /* DetailViewController.swift in Sources */,
+				447F6F562311B72400A4CFC0 /* SelectData.swift in Sources */,
 				44BF284723113D4C00E325DA /* ViewController.swift in Sources */,
 				44BF284523113D4C00E325DA /* AppDelegate.swift in Sources */,
 			);

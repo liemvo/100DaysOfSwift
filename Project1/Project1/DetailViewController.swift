@@ -10,15 +10,15 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    var seletedImage: String?
+    var selectedData: SelectData?
     @IBOutlet weak var imageView: UIImageView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let imageName = seletedImage {
-            title = imageName
-            imageView?.image = UIImage(named: imageName)
+        if let data = selectedData {
+            imageView?.image = UIImage(named: data.selectName)
+            title = "\(data.position) of \(data.count)"
         }
         navigationItem.largeTitleDisplayMode = .never
     }
@@ -31,7 +31,6 @@ class DetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.hidesBarsOnTap = false
-        
     }
 
 }

@@ -49,7 +49,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let detailViewController = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
-            detailViewController.seletedImage = images[indexPath.row]
+            detailViewController.selectedData = SelectData(selectName: images[indexPath.row], position: indexPath.row + 1, count: images.count)
             navigationController?.pushViewController(detailViewController, animated: true)
         }
     }
