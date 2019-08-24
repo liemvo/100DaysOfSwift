@@ -18,6 +18,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         loadImages()
         tableView.dataSource = self
         tableView.delegate = self
+        title = "Storm Viewer"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func loadImages() {
@@ -41,11 +43,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath)
-        (cell as? ImageCell)?.setView(file: images[indexPath.row])
+        cell.textLabel?.text = "Image Name \(images[indexPath.row])"
         return cell
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let detailViewController = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            detailViewController.seletedImage = images[indexPath.row]
+            navigationController?.pushViewController(detailViewController, animated: true)
+        }
     }
 }
 
