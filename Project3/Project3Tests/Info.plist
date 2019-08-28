@@ -19,6 +19,6 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Save photo that you liked</string>
+	<string>Save the photo that you liked!!</string>
 </dict>
 </plist>

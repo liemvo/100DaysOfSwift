@@ -20,6 +20,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.delegate = self
         title = "Storm Viewer"
         navigationController?.navigationBar.prefersLargeTitles = true
+		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(inviteTapped))
     }
     
     private func loadImages() {
@@ -53,5 +54,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             navigationController?.pushViewController(detailViewController, animated: true)
         }
     }
+	
+	@objc func inviteTapped() {
+		
+		let vc = UIActivityViewController(activityItems: ["Please try this app"], applicationActivities: [])
+		vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+		present(vc, animated: true)
+	}
 }
 
