@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Project3
+//  WorldFlags
 //
-//  Created by Liem Vo on 8/28/19.
+//  Created by Liem Vo on 8/29/19.
 //  Copyright © 2019 Liem Vo. All rights reserved.
 //
 
@@ -17,6 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 		return true
 	}
-
+	
 }
 
