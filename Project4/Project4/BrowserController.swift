@@ -9,11 +9,13 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, WKNavigationDelegate {
+class BrowserController: UIViewController, WKNavigationDelegate {
 	var webView: WKWebView!
 	var progressView: UIProgressView!
 	var websites = ["apple.com", "hackingwithswift.com"]
-	
+	var backButton: UIBarButtonItem!
+	var forwardButton: UIBarButtonItem!
+	var selectPage: String?
 	override func loadView() {
 		webView = WKWebView()
 		webView.navigationDelegate = self
@@ -22,7 +24,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		openPage(string: websites[0])
+		openPage(string: selectPage ?? websites[0])
 		webView.allowsBackForwardNavigationGestures = true
 		
 		setupOpenBarItem()
@@ -43,11 +45,18 @@ class ViewController: UIViewController, WKNavigationDelegate {
 					return
 				}
 			}
+			
+			showBlockSite(site: host)
 		}
 		
 		decisionHandler(.cancel)
 	}
 	
+	private func showBlockSite(site: String) {
+		let ac = UIAlertController(title: "Block!", message: "You are not allowed to visit \(site)", preferredStyle: .alert)
+		ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		present(ac, animated: true, completion: nil)
+	}
 	private func observeProgress() {
 		webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
 	}
@@ -59,11 +68,13 @@ class ViewController: UIViewController, WKNavigationDelegate {
 	private func setupToolbarItems() {
 		let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 		let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
+		backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(goBack))
+		forwardButton = UIBarButtonItem(title: "Forward", style: .plain, target: self, action: #selector(goForward))
 		progressView = UIProgressView(progressViewStyle: .default)
 		progressView.sizeToFit()
 		let progressButton = UIBarButtonItem(customView: progressView)
 		
-		toolbarItems = [progressButton, spacer, refresh]
+		toolbarItems = [progressButton, backButton, forwardButton, spacer, refresh]
 		navigationController?.isToolbarHidden = false
 	}
 	
@@ -80,6 +91,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
 		if keyPath == "estimatedProgress" {
 			progressView.progress = Float(webView.estimatedProgress)
 		}
+		backButton.isEnabled = webView.canGoBack
+		forwardButton.isEnabled = webView.canGoForward
 	}
 	
 	private func openPage(action: UIAlertAction) {
@@ -90,5 +103,16 @@ class ViewController: UIViewController, WKNavigationDelegate {
 		let url = URL(string: "https://\(string)")!
 		webView.load(URLRequest(url: url))
 	}
+	
+	@objc private func goBack() {
+		if webView.canGoBack {
+			webView.goBack()
+		}
+	}
+	
+	@objc private func goForward() {
+		if webView.canGoForward {
+			webView.goForward()
+		}
+	}
 }
-
