@@ -18,6 +18,7 @@ class ViewController: UITableViewController {
 		loadWords()
 		startGame()
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
+		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(startGame))
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,29 +46,27 @@ class ViewController: UITableViewController {
 	
 	private func submit(_ answer: String) {
 		let lowerAnswer = answer.lowercased()
-		var errorTitle: String = ""
-		var errorMessage: String = ""
 		if isPossible(word: lowerAnswer) {
 			if isOriginal(word: lowerAnswer) {
 				if isReal(word: lowerAnswer) {
 					usedWords.insert(answer, at: 0)
 					let indexPath = IndexPath(row: 0, section: 0)
 					tableView.insertRows(at: [indexPath], with: .automatic)
+					return
 				} else {
-					errorTitle = "Word not recognised"
-					errorMessage = "You can't just make them up, you know!"
+					showError(title: "Word not recognised", message: "You can't just make them up, you know!")
 				}
 			} else {
-				errorTitle = "Word used already"
-				errorMessage = "Be more original!"
+				showError(title: "Word used already", message: "Be more original!")
 			}
 		} else {
 			guard let title = title?.lowercased() else { return }
-			errorTitle = "Word not possible"
-			errorMessage = "You can't spell that word from \(title)"
+			showError(title: "Word not possible", message: "You can't spell that word from \(title)")
 		}
-		
-		let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
+	}
+	
+	private func showError(title: String, message: String) {
+		let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
 		ac.addAction(UIAlertAction(title: "OK", style: .default))
 		present(ac, animated: true)
 	}
@@ -92,6 +91,8 @@ class ViewController: UITableViewController {
 	}
 	
 	private func isReal(word: String) -> Bool {
+		if word.count <= 3 { return false }
+		
 		let checker = UITextChecker()
 		let range = NSRange(location: 0, length: word.utf16.count)
 		let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
@@ -109,7 +110,7 @@ class ViewController: UITableViewController {
 		}
 	}
 	
-	private func startGame() {
+	@objc private func startGame() {
 		title = allWords.randomElement()
 		usedWords.removeAll(keepingCapacity: true)
 		tableView.reloadData()
