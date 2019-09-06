@@ -4,3 +4,6 @@
 3. [Project 3](Project3)
 4. [Day 23 Challeng](WorldFlags)
 5. [Project 4](Project4)
+5. [Project 5](Project5)
+5. [Project 6a](Project6a) 
+5. [Project 6b](Project6b)
