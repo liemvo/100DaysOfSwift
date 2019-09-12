@@ -9,3 +9,4 @@
 8. [Project 6b](Project6b)
 9. [ShoppingList](ShoppingList)
 10. [Project 7](Project7)
+11. [Project 8](Project8)

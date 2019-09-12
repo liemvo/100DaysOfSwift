@@ -17,6 +17,7 @@ class ViewController: UIViewController {
 	
 	var activatedButtons = [UIButton]()
 	var solutions = [String]()
+	var corrects = [String]()
 	var score = 0 {
 		didSet {
 			scoreLabel.text = "Score: \(score)"
@@ -67,7 +68,7 @@ class ViewController: UIViewController {
 		let clear = UIButton(type: .system)
 		clear.translatesAutoresizingMaskIntoConstraints = false
 		clear.setTitle("CLEAR", for: .normal)
-		submit.addTarget(self, action: #selector(clearTapped), for: .touchUpInside)
+		clear.addTarget(self, action: #selector(clearTapped), for: .touchUpInside)
 		view.addSubview(clear)
 		
 		let buttonsView = UIView()
@@ -83,6 +84,8 @@ class ViewController: UIViewController {
 				letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 36)
 				letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
 				let frame = CGRect(x: column * width, y: row * height, width: width, height: height)
+				letterButton.layer.borderWidth = 1
+				letterButton.layer.borderColor = UIColor(red: 1.0, green: 0.6, blue: 0.2, alpha: 1.0).cgColor
 				letterButtons.append(letterButton)
 				letterButton.frame = frame
 				buttonsView.addSubview(letterButton)
@@ -146,15 +149,20 @@ class ViewController: UIViewController {
 			var splitAnswers = answersLabel.text?.components(separatedBy: "\n")
 			splitAnswers?[solutionPosition] = answerText
 			answersLabel.text = splitAnswers?.joined(separator: "\n")
-			
+			corrects.append(answerText)
 			currentAnswer.text = ""
 			score += 1
 			
-			if score % 7 == 0 {
+			if corrects.count == 7 {
 				let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
 				ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
 				present(ac, animated: true)
 			}
+		} else {
+			score -= 1
+			let ac = UIAlertController(title: "Ohhh!!!", message: "It is incorrect. Please try again!", preferredStyle: .alert)
+			ac.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+			present(ac, animated: true)
 		}
 	}
 	
@@ -209,7 +217,7 @@ class ViewController: UIViewController {
 	private func levelUp(action: UIAlertAction) {
 		level += 1
 		solutions.removeAll(keepingCapacity: true)
-		
+		corrects.removeAll()
 		loadLevel()
 		
 		for btn in letterButtons {
