@@ -15,7 +15,7 @@ class ViewController: UITableViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		showData()
+		performSelector(inBackground: #selector(loadData), with: nil)
 		navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Credits", style: .plain, target: self, action: #selector(showCredit)),
 		UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(filter))]
 	}
@@ -38,7 +38,7 @@ class ViewController: UITableViewController {
 		navigationController?.pushViewController(vc, animated: true)
 	}
 	
-	private func showData() {
+	@objc private func loadData() {
 		let urlString: String
 		if navigationController?.tabBarItem.tag == 0 {
 			// urlString = "https://api.whitehouse.gov/v1/petitions.json?limit=100"
@@ -54,7 +54,7 @@ class ViewController: UITableViewController {
 				return
 			}
 		}
-		showError()
+		performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
 	}
 	
 	private func parse(json: Data) {
@@ -63,11 +63,13 @@ class ViewController: UITableViewController {
 		if let jsonPetitions = try? decoder.decode(Petitions.self, from: json) {
 			petitions = jsonPetitions.results
 			originals = petitions
-			tableView.reloadData()
+			tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: false)
+		} else {
+			performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
 		}
 	}
 	
-	private func showError() {
+	@objc private func showError() {
 		let ac = UIAlertController(title: "Loading error", message: "There was a problem loading the feed; please check your connection and try again.", preferredStyle: .alert)
 		ac.addAction(UIAlertAction(title: "OK", style: .default))
 		present(ac, animated: true)
@@ -92,10 +94,12 @@ class ViewController: UITableViewController {
 	}
 	
 	private func filterText(_ text: String) {
-		petitions = petitions.filter({ (petition) -> Bool in
-			petition.title.contains(text)
-		})
-		tableView.reloadData()
+		DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+			self?.petitions = self?.petitions.filter({ (petition) -> Bool in
+				petition.title.contains(text)
+			}) ?? []
+			self?.tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: false)
+		}
 	}
 }
 

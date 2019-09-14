@@ -15,7 +15,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadImages()
+		performSelector(inBackground: #selector(loadImages), with: nil)
         tableView.dataSource = self
         tableView.delegate = self
         title = "Storm Viewer"
@@ -23,7 +23,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(inviteTapped))
     }
     
-    private func loadImages() {
+    @objc private func loadImages() {
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
         let items = try! fm.contentsOfDirectory(atPath: path)
@@ -32,6 +32,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 images.append(item)
             }
         }
+		tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: false)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
