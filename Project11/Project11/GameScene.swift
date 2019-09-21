@@ -11,7 +11,9 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
 	var scoreLabel: SKLabelNode!
-
+	var numberBall = 0
+	var maxBall = 5
+	let ballsName = ["ballRed", "ballBlue", "ballGreen", "ballGrey", "ballPurple", "ballRed", "ballYellow" ]
 	var score = 0 {
 		didSet {
 			scoreLabel.text = "Score: \(score)"
@@ -31,6 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	}
 	
     override func didMove(to view: SKView) {
+		var maxBall = 5
         let background  = SKSpriteNode(imageNamed: "background")
 		background.position = CGPoint(x:512, y:384)
 		background.blendMode = .replace
@@ -84,7 +87,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 			if editingMode {
 				createBox(at: location)
 			} else {
-				createBall(at: location)
+				if location.y > 300 && numberBall <= maxBall{
+					createBall(at: location)
+				}
 			}
 		}
 		
@@ -95,7 +100,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		let box = SKSpriteNode(color: UIColor(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1), size: size)
 		box.zRotation = CGFloat.random(in: 0...3)
 		box.position = location
-
+		box.name = "box"
 		box.physicsBody = SKPhysicsBody(rectangleOf: box.size)
 		box.physicsBody?.isDynamic = false
 
@@ -103,13 +108,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	}
 	
 	private func createBall(at location: CGPoint) {
-		let ball = SKSpriteNode(imageNamed: "ballRed")
+		let position = Int.random(in: 0...6)
+		let ball = SKSpriteNode(imageNamed: ballsName[position])
 		ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width/2.0)
 		ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
 		ball.physicsBody?.restitution = 0.4
 		ball.position = location
 		ball.name = "ball"
 		addChild(ball)
+		numberBall += 1
 	}
 	private func makeBouncer(at position: CGPoint) {
 		let bouncer = SKSpriteNode(imageNamed: "bouncer")
@@ -149,9 +156,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	}
 	
 	private func collisionBetween(ball: SKNode, object: SKNode) {
-		if object.name == "good" {
+		if object.name == "box" {
+			if numberBall == maxBall {
+				object.removeFromParent()
+			}
+		} else if object.name == "good" {
 			destroy(ball: ball)
 			score += 1
+			maxBall += 1
 		} else if object.name == "bad" {
 			destroy(ball: ball)
 			score -= 1
@@ -159,6 +171,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	}
 
 	private func destroy(ball: SKNode) {
+		if let fireParticles = SKEmitterNode(fileNamed: "FireParticles") {
+			fireParticles.position = ball.position
+			addChild(fireParticles)
+		}
 		ball.removeFromParent()
 	}
 }
