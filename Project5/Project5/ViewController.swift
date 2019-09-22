@@ -16,9 +16,23 @@ class ViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		loadWords()
-		startGame()
+		loadGame()
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
 		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(startGame))
+	}
+	
+	private func loadGame() {
+		let defaults = UserDefaults.standard
+		usedWords = defaults.array(forKey: "usedWords") as? [String] ?? []
+		title = defaults.value(forKey: "currentWord") as? String ?? allWords.randomElement()
+		UserDefaults.standard.set(title, forKey: "currentWord")
+		tableView.reloadData()
+	}
+	
+	private func save() {
+		let defaults = UserDefaults.standard
+		defaults.set(usedWords, forKey: "usedWords")
+
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -52,6 +66,7 @@ class ViewController: UITableViewController {
 					usedWords.insert(answer, at: 0)
 					let indexPath = IndexPath(row: 0, section: 0)
 					tableView.insertRows(at: [indexPath], with: .automatic)
+					save()
 					return
 				} else {
 					showError(title: "Word not recognised", message: "You can't just make them up, you know!")
@@ -112,6 +127,7 @@ class ViewController: UITableViewController {
 	
 	@objc private func startGame() {
 		title = allWords.randomElement()
+		UserDefaults.standard.set(title, forKey: "currentWord")
 		usedWords.removeAll(keepingCapacity: true)
 		tableView.reloadData()
 	}

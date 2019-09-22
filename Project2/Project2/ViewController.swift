@@ -48,7 +48,25 @@ class ViewController: UIViewController {
 			}
 			showTitle()
 			currentQuention += 1
+		} else {
+			let userdefaults = UserDefaults.standard
+			let savedScore = userdefaults.value(forKey: "score") as? Int ?? 0
+			var message = "Your score is \(score)"
+			if score > savedScore {
+				userdefaults.set(score, forKey: "score")
+				message = "\(message). You just beat your last score!"
+			}
+			
+			let alertViewController = UIAlertController(title: "Congratulation!!!", message: message, preferredStyle: .alert)
+			alertViewController.addAction(UIAlertAction(title: "Continue", style: .default, handler: reset))
+			present(alertViewController, animated: true)
 		}
+	}
+	
+	private func reset(action: UIAlertAction! = nil) {
+		score = 0
+		currentQuention = 0
+		correctAnswer = 0
 	}
 	
 	
