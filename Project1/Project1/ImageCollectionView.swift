@@ -21,7 +21,6 @@ class ImageCollectionView: UICollectionViewController {
 		navigationItem.title = "Images"
 
     }
-
 	
 	@objc private func loadImages() {
 		let fm = FileManager.default
@@ -51,16 +50,31 @@ class ImageCollectionView: UICollectionViewController {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ImageCell else {
 			fatalError("Unable to dequeue PersonCell.")
 		}
-    	cell.labelText.text = images[indexPath.row]
-		cell.imageView.image = UIImage(named: images[indexPath.row])
+		let imageName = images[indexPath.row]
+    	cell.labelText.text = imageName
+		cell.imageView.image = UIImage(named: imageName)
+		cell.viewsText.text = "Views: \(getViews(name: imageName))"
         return cell
     }
 
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if let detailViewController = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
 			detailViewController.selectedData = SelectData(selectName: images[indexPath.row], position: indexPath.row + 1, count: images.count)
+			let imageName = images[indexPath.row]
+			let views = getViews(name: imageName) + 1
+			saveViews(name: imageName, views: views)
+			collectionView.reloadItems(at: [indexPath])
 			navigationController?.pushViewController(detailViewController, animated: true)
 		}
 	}
 	
+	private func getViews(name imageName: String) -> Int {
+		let defaults = UserDefaults.standard
+		return defaults.value(forKey: imageName) as? Int ?? 0
+	}
+	
+	private func saveViews(name imageName: String, views: Int) {
+		let defaults = UserDefaults.standard
+		defaults.set(views, forKey: imageName)
+	}
 }
