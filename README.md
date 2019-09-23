@@ -15,3 +15,5 @@
 13. [Project 10](Project10)
 14. [Hangman](Hangman)
 15. [Project 11](Project11)
+16. [Project 12a](Project12a)
+17. [Project 12b](Project12b)
