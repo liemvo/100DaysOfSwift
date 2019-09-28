@@ -75,3 +75,4 @@ class WhackSlot: SKNode {
 	}
 }
 
+let fireParticles = SKEmitterNode(fileNamed:"FireParticles")
