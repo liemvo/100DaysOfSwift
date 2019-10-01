@@ -79,6 +79,11 @@ class ViewController: UIViewController {
 			score -= 1
 			title = "Wrong"
 		}
+		UIView.animate(withDuration: 1, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: {
+			sender.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+		}) { isFinished in
+			sender.transform = .identity
+		}
 		showTitle()
 		showResult(title: title)
 	}
