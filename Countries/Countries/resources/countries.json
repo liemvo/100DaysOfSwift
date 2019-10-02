@@ -1,0 +1,402 @@
+[
+   {
+      "name":"Afghanistan",
+      "area":"652,090 km2",
+      "flagCode":"af",
+      "capital":"Kabul",
+      "path":"/afghanistan",
+      "population":"25,500,100"
+   },
+   {
+      "name":"Armenia",
+      "area":"29,800 km2",
+      "flagCode":"am",
+      "capital":"Yerevan",
+      "path":"/armenia",
+      "population":"3,017,400"
+   },
+   {
+      "name":"Azerbaijan",
+      "area":"86,600 km2",
+      "flagCode":"az",
+      "capital":"Baku",
+      "path":"/azerbaijan",
+      "population":"9,477,100"
+   },
+   {
+      "name":"Bahrain",
+      "area":"694 km2",
+      "flagCode":"bh",
+      "capital":"Manama",
+      "path":"/bahrain",
+      "population":"1,234,571"
+   },
+   {
+      "name":"Bangladesh",
+      "area":"143,998 km2",
+      "flagCode":"bd",
+      "capital":"Dhaka",
+      "path":"/bangladesh",
+      "population":"152,518,015"
+   },
+   {
+      "name":"Bhutan",
+      "area":"47,000 km2",
+      "flagCode":"bt",
+      "capital":"Thimphu",
+      "path":"/bhutan",
+      "population":"745,200"
+   },
+   {
+      "name":"Brunei",
+      "area":"5,765 km2",
+      "flagCode":"bn",
+      "capital":"Bandar Seri Begawan",
+      "path":"/brunei",
+      "population":"393,162"
+   },
+   {
+      "name":"Cambodia",
+      "area":"181,035 km2",
+      "flagCode":"kh",
+      "capital":"Phnom Penh",
+      "path":"/cambodia",
+      "population":"15,135,000"
+   },
+   {
+      "name":"Cyprus",
+      "area":"9,251 km2",
+      "flagCode":"cy",
+      "capital":"Nicosia",
+      "path":"/cyprus",
+      "population":"865,878"
+   },
+   {
+      "name":"East Timor",
+      "area":"14,874 km2",
+      "flagCode":"tl",
+      "capital":"Dili",
+      "path":"/east-timor",
+      "population":"1,066,409"
+   },
+   {
+      "name":"Egypt",
+      "area":"980,869 km2",
+      "flagCode":"eg",
+      "capital":"Cairo",
+      "path":"/egypt",
+      "population":"86,127,000"
+   },
+   {
+      "name":"Georgia",
+      "area":"69,700 km2",
+      "flagCode":"ge",
+      "capital":"Tbilisi",
+      "path":"/georgia",
+      "population":"4,483,800"
+   },
+   {
+      "name":"India",
+      "area":"3,287,260 km2",
+      "flagCode":"in",
+      "capital":"New Delhi",
+      "path":"/india",
+      "population":"1,241,610,000"
+   },
+   {
+      "name":"Indonesia",
+      "area":"1,904,570 km2",
+      "flagCode":"id",
+      "capital":"Jakarta",
+      "path":"/indonesia",
+      "population":"249,866,000"
+   },
+   {
+      "name":"Iran",
+      "area":"1,648,200 km2",
+      "flagCode":"ir",
+      "capital":"Tehran",
+      "path":"/iran",
+      "population":"77,288,000"
+   },
+   {
+      "name":"Iraq",
+      "area":"438,317 km2",
+      "flagCode":"iq",
+      "capital":"Baghdad",
+      "path":"/iraq",
+      "population":"34,035,000"
+   },
+   {
+      "name":"Israel",
+      "area":"22,145 km2",
+      "flagCode":"il",
+      "capital":"Jerusalem",
+      "path":"/israel",
+      "population":"8,146,300"
+   },
+   {
+      "name":"Japan",
+      "area":"377,873 km2",
+      "flagCode":"jp",
+      "capital":"Tokyo",
+      "path":"/japan",
+      "population":"127,180,000"
+   },
+   {
+      "name":"Jordan",
+      "area":"89,342 km2",
+      "flagCode":"jo",
+      "capital":"Amman",
+      "path":"/jordan",
+      "population":"6,558,900"
+   },
+   {
+      "name":"Kazakhstan",
+      "area":"2,724,900 km2",
+      "flagCode":"kz",
+      "capital":"Astana",
+      "path":"/kazakhstan",
+      "population":"17,186,000"
+   },
+   {
+      "name":"Kuwait",
+      "area":"17,818 km2",
+      "flagCode":"kw",
+      "capital":"Kuwait City",
+      "path":"/kuwait",
+      "population":"3,065,850"
+   },
+   {
+      "name":"Kyrgyzstan",
+      "area":"199,900 km2",
+      "flagCode":"kg",
+      "capital":"Bishkek",
+      "path":"/kyrgyzstan",
+      "population":"5,663,133"
+   },
+   {
+      "name":"Laos",
+      "area":"236,800 km2",
+      "flagCode":"la",
+      "capital":"Vientiane",
+      "path":"/laos",
+      "population":"6,580,800"
+   },
+   {
+      "name":"Lebanon",
+      "area":"10,400 km2",
+      "flagCode":"lb",
+      "capital":"Beirut",
+      "path":"/lebanon",
+      "population":"4,822,000"
+   },
+   {
+      "name":"Malaysia",
+      "area":"329,847 km2",
+      "flagCode":"my",
+      "capital":"Kuala Lumpur",
+      "path":"/malaysia",
+      "population":"30,041,000"
+   },
+   {
+      "name":"Maldives",
+      "area":"298 km2",
+      "flagCode":"mv",
+      "capital":"Malé",
+      "path":"/maldives",
+      "population":"317,280"
+   },
+   {
+      "name":"Mongolia",
+      "area":"1,564,120 km2",
+      "flagCode":"mn",
+      "capital":"Ulaanbaatar",
+      "path":"/mongolia",
+      "population":"2,931,300"
+   },
+   {
+      "name":"Myanmar",
+      "area":"676,578 km2",
+      "flagCode":"mm",
+      "capital":"Naypyidaw",
+      "path":"/myanmar",
+      "population":"53,259,000"
+   },
+   {
+      "name":"Nepal",
+      "area":"147,181 km2",
+      "flagCode":"np",
+      "capital":"Kathmandu",
+      "path":"/nepal",
+      "population":"26,494,504"
+   },
+   {
+      "name":"North Korea",
+      "area":"120,538 km2",
+      "flagCode":"kp",
+      "capital":"Pyongyang",
+      "path":"/north-korea",
+      "population":"24,895,000"
+   },
+   {
+      "name":"Oman",
+      "area":"309,500 km2",
+      "flagCode":"om",
+      "capital":"Muscat",
+      "path":"/oman",
+      "population":"3,957,000"
+   },
+   {
+      "name":"Pakistan",
+      "area":"796,095 km2",
+      "flagCode":"pk",
+      "capital":"Islamabad",
+      "path":"/pakistan",
+      "population":"185,914,000"
+   },
+   {
+      "name":"The People's Republic of China",
+      "area":"9,640,820 km2",
+      "flagCode":"cn",
+      "capital":"Beijing",
+      "path":"/the-people-s-republic-of-china",
+      "population":"1,363,350,000"
+   },
+   {
+      "name":"The Philippines",
+      "area":"300,000 km2",
+      "flagCode":"ph",
+      "capital":"Manila",
+      "path":"/the-philippines",
+      "population":"99,275,100"
+   },
+   {
+      "name":"Qatar",
+      "area":"11,000 km2",
+      "flagCode":"qa",
+      "capital":"Doha",
+      "path":"/qatar",
+      "population":"2,045,239"
+   },
+   {
+      "name":"The Republic of China",
+      "area":"36,188 km2",
+      "flagCode":"tw",
+      "capital":"Taipei",
+      "path":"/the-republic-of-china",
+      "population":"23,379,129"
+   },
+   {
+      "name":"Russia",
+      "area":"17,098,200 km2",
+      "flagCode":"ru",
+      "capital":"Moscow",
+      "path":"/russia",
+      "population":"143,700,000"
+   },
+   {
+      "name":"Saudi Arabia",
+      "area":"2,149,690 km2",
+      "flagCode":"sa",
+      "capital":"Riyadh",
+      "path":"/saudi-arabia",
+      "population":"29,994,272"
+   },
+   {
+      "name":"Singapore",
+      "area":"683 km2",
+      "flagCode":"sg",
+      "capital":"Singapore",
+      "path":"/singapore",
+      "population":"5,399,200"
+   },
+   {
+      "name":"South Korea",
+      "area":"99,538 km2",
+      "flagCode":"kr",
+      "capital":"Seoul",
+      "path":"/south-korea",
+      "population":"50,219,669"
+   },
+   {
+      "name":"Sri Lanka",
+      "area":"65,610 km2",
+      "flagCode":"lk",
+      "capital":"Colombo",
+      "path":"/sri-lanka",
+      "population":"20,277,597"
+   },
+   {
+      "name":"Syria",
+      "area":"185,180 km2",
+      "flagCode":"sy",
+      "capital":"Damascus",
+      "path":"/syria",
+      "population":"21,898,000"
+   },
+   {
+      "name":"Tajikistan",
+      "area":"143,100 km2",
+      "flagCode":"tj",
+      "capital":"Dushanbe",
+      "path":"/tajikistan",
+      "population":"8,160,000"
+   },
+   {
+      "name":"Thailand",
+      "area":"513,115 km2",
+      "flagCode":"th",
+      "capital":"Bangkok",
+      "path":"/thailand",
+      "population":"65,926,261"
+   },
+   {
+      "name":"Turkey",
+      "area":"783,562 km2",
+      "flagCode":"tr",
+      "capital":"Ankara",
+      "path":"/turkey",
+      "population":"76,667,864"
+   },
+   {
+      "name":"Turkmenistan",
+      "area":"488,100 km2",
+      "flagCode":"tm",
+      "capital":"Ashgabat",
+      "path":"/turkmenistan",
+      "population":"5,240,000"
+   },
+   {
+      "name":"The United Arab Emirates",
+      "area":"83,600 km2",
+      "flagCode":"ae",
+      "capital":"Abu Dhabi",
+      "path":"/the-united-arab-emirates",
+      "population":"8,264,070"
+   },
+   {
+      "name":"Uzbekistan",
+      "area":"447,400 km2",
+      "flagCode":"uz",
+      "capital":"Tashkent",
+      "path":"/uzbekistan",
+      "population":"30,183,400"
+   },
+   {
+      "name":"Vietnam",
+      "area":"331,689 km2",
+      "flagCode":"vn",
+      "capital":"Hanoi",
+      "path":"/vietnam",
+      "population":"89,708,900"
+   },
+   {
+      "name":"Yemen",
+      "area":"527,968 km2",
+      "flagCode":"ye",
+      "capital":"Sanaá",
+      "path":"/yemen",
+      "population":"25,235,000"
+   }
+]

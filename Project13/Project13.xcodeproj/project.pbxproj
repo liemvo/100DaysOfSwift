@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		446F384A233B631400109A31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F3849233B631400109A31 /* AppDelegate.swift */; };
-		446F384C233B631400109A31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F384B233B631400109A31 /* SceneDelegate.swift */; };
 		446F384E233B631400109A31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F384D233B631400109A31 /* ViewController.swift */; };
 		446F3851233B631400109A31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 446F384F233B631400109A31 /* Main.storyboard */; };
 		446F3853233B631500109A31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446F3852233B631500109A31 /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 /* Begin PBXFileReference section */
 		446F3846233B631400109A31 /* Project13.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project13.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		446F3849233B631400109A31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		446F384B233B631400109A31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		446F384D233B631400109A31 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		446F3850233B631400109A31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		446F3852233B631500109A31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,7 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				446F3849233B631400109A31 /* AppDelegate.swift */,
-				446F384B233B631400109A31 /* SceneDelegate.swift */,
 				446F384D233B631400109A31 /* ViewController.swift */,
 				446F384F233B631400109A31 /* Main.storyboard */,
 				446F3852233B631500109A31 /* Assets.xcassets */,
@@ -140,7 +137,6 @@
 			files = (
 				446F384E233B631400109A31 /* ViewController.swift in Sources */,
 				446F384A233B631400109A31 /* AppDelegate.swift in Sources */,
-				446F384C233B631400109A31 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +212,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +266,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
