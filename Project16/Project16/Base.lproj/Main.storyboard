@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -30,11 +31,46 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="nAR-22-yfh" id="GcX-bq-0kO"/>
+                        <segue destination="Q7t-Os-gy3" kind="showDetail" identifier="viewDetail" id="Lkr-ZF-OW0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="138.61607142857142"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="0hq-sy-JRa">
+            <objects>
+                <viewController id="Q7t-Os-gy3" customClass="DetailViewController" customModule="Project16" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9OD-2K-GgX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7e-Cr-UPm">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="S7e-Cr-UPm" firstAttribute="top" secondItem="tN4-so-cI7" secondAttribute="top" id="705-wL-AS3"/>
+                            <constraint firstItem="tN4-so-cI7" firstAttribute="trailing" secondItem="S7e-Cr-UPm" secondAttribute="trailing" id="cTl-jA-EEJ"/>
+                            <constraint firstItem="S7e-Cr-UPm" firstAttribute="leading" secondItem="tN4-so-cI7" secondAttribute="leading" id="rC2-wb-HN1"/>
+                            <constraint firstItem="tN4-so-cI7" firstAttribute="bottom" secondItem="S7e-Cr-UPm" secondAttribute="bottom" id="vEO-KL-da7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tN4-so-cI7"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="S7e-Cr-UPm" id="BA9-Ik-exC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WuT-Mg-fYo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1306" y="183"/>
         </scene>
     </scenes>
 </document>
