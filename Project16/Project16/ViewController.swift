@@ -14,16 +14,14 @@ class ViewController: UIViewController, MKMapViewDelegate {
 	@IBOutlet weak var mapView: MKMapView!
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view.
+	
 		mapView.delegate = self
+		title = "Capital City"
 		setupCapitals()
+		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(chooseMapType))
 	}
 	
-	override func viewDidAppear(_ animated: Bool) {
-		chooseMapType()
-	}
-	
-	private func chooseMapType() {
+	@objc private func chooseMapType() {
 		let ac = UIAlertController(title: "Map Type", message: "Please choose map type", preferredStyle: .alert)
 		ac.addAction(UIAlertAction(title: "Satellite", style: .default) { [weak self] _ in
 			self?.mapView.mapType = .satellite
@@ -35,6 +33,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
 			self?.mapView.mapType = .hybrid
 		})
 		present(ac, animated: true)
+		
 	}
 	
 	private func setupCapitals() {
@@ -77,12 +76,11 @@ class ViewController: UIViewController, MKMapViewDelegate {
 	
 	func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
 		guard let capital = view.annotation as? Capital else { return }
-		let placeName = capital.title
-		let placeInfo = capital.info
-		
-		let ac = UIAlertController(title: placeName, message: placeInfo, preferredStyle: .alert)
-		ac.addAction(UIAlertAction(title: "OK", style: .default))
-		present(ac, animated: true)
+
+		if let detailViewController = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+			detailViewController.capital = capital
+			navigationController?.pushViewController(detailViewController, animated: true)
+		}
 	}
 }
 

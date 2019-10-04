@@ -10,13 +10,18 @@ import WebKit
 import UIKit
 
 class DetailViewController: UIViewController {
-
 	var capital: Capital?
 	@IBOutlet weak var webView: WKWebView!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		if let newCapital = capital {
-			webView.load(URLRequest(url: URL())
+			openPage(newCapital.title ?? "")
 		}
+	}
+	
+	private func openPage(_ string: String){
+		title = string
+		let url = URL(string: "https://en.wikipedia.org/wiki/\(string)")!
+		webView.load(URLRequest(url: url))
 	}
 }
