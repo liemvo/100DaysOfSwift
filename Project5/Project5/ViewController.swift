@@ -59,6 +59,9 @@ class ViewController: UITableViewController {
 	}
 	
 	private func submit(_ answer: String) {
+		if answer.count >= 6 {
+			print(answer)
+		}
 		let lowerAnswer = answer.lowercased()
 		if isPossible(word: lowerAnswer) {
 			if isOriginal(word: lowerAnswer) {
