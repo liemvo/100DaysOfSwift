@@ -42,11 +42,9 @@ class GameScene: SKScene {
 	}
     
 	private var timeLeftLabel: SKLabelNode!
-	private var timeLeft: Int = 61 {
+	private var timeLeft: Int = 60 {
 		didSet {
-			if timeLeft < 60 {
-				timeLeftLabel.text = "Time: \(timeLeft)"
-			}
+			timeLeftLabel.text = "Time: \(timeLeft)"
 		}
 	}
 	
@@ -70,7 +68,7 @@ class GameScene: SKScene {
 		timeLeftLabel.horizontalAlignmentMode = .left
 		addChild(timeLeftLabel)
 		
-		Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(startGame), userInfo: nil, repeats: false)
+		Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(startGame), userInfo: nil, repeats: false)
     }
 	
 	override func update(_ currentTime: TimeInterval) {
