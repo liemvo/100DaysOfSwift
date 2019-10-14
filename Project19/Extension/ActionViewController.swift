@@ -16,7 +16,10 @@ class ActionViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+		let scriptsButton = UIBarButtonItem(title: "Scripts", style: .plain, target: self, action: #selector(selectScripts))
+		let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+		navigationItem.setRightBarButtonItems([doneButton, scriptsButton], animated: true)
+		
 		let notificationCenter = NotificationCenter.default
 		notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
 		notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -33,23 +36,37 @@ class ActionViewController: UIViewController {
 
 					DispatchQueue.main.async {
 						self?.title = self?.pageTitle
+						
 					}
 				}
 			}
 		}
     }
 
-    @IBAction func done() {
+    @objc private func done() {
         let item = NSExtensionItem()
 		let argument: NSDictionary = ["customJavaScript": script.text]
 		let webDictionary: NSDictionary = [NSExtensionJavaScriptFinalizeArgumentKey: argument]
 		let customJavaScript = NSItemProvider(item: webDictionary, typeIdentifier: kUTTypePropertyList as String)
 		item.attachments = [customJavaScript]
 
+		let userDefault = UserDefaults.standard
+		if self.pageURL.count > 0 {
+			userDefault.set(URL.init(string: script.text), forKey: self.pageURL)
+		}
+		
 		extensionContext?.completeRequest(returningItems: [item])
     }
 	
-	@objc func adjustForKeyboard(notification: Notification) {
+	@objc private func selectScripts() {
+		let ac = UIAlertController(title: "Scripts", message: "", preferredStyle: .actionSheet)
+		ac.addAction(UIAlertAction(title: "Alert title", style: .default, handler: { [weak self] _ in
+			self?.script?.text = "alert(document.title);"
+		}))
+		present(ac, animated: true)
+	}
+	
+	@objc private func adjustForKeyboard(notification: Notification) {
 		guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
 
 		let keyboardScreenEndFrame = keyboardValue.cgRectValue
