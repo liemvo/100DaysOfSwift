@@ -17,19 +17,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uEa-Bz-zK8">
-                                <rect key="frame" x="0.0" y="88" width="320" height="440"/>
+                                <rect key="frame" x="0.0" y="88" width="320" height="336"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BJR-Wq-1yQ">
+                                <rect key="frame" x="143" y="478" width="34" height="30"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="save:" destination="ObA-dk-sSI" eventType="touchUpInside" id="3i7-ML-QUh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="VVe-Uw-JpX" firstAttribute="bottom" secondItem="uEa-Bz-zK8" secondAttribute="bottom" id="D47-HE-YBJ"/>
+                            <constraint firstItem="BJR-Wq-1yQ" firstAttribute="top" secondItem="uEa-Bz-zK8" secondAttribute="bottom" constant="54" id="0wE-g9-fwe"/>
                             <constraint firstItem="uEa-Bz-zK8" firstAttribute="trailing" secondItem="VVe-Uw-JpX" secondAttribute="trailing" id="VWA-KW-Luf"/>
                             <constraint firstItem="uEa-Bz-zK8" firstAttribute="leading" secondItem="VVe-Uw-JpX" secondAttribute="leading" id="ksa-aD-O17"/>
+                            <constraint firstItem="BJR-Wq-1yQ" firstAttribute="centerX" secondItem="zMn-AG-sqS" secondAttribute="centerX" id="pKJ-NZ-aqD"/>
                             <constraint firstItem="uEa-Bz-zK8" firstAttribute="top" secondItem="VVe-Uw-JpX" secondAttribute="top" id="toA-g9-xMf"/>
+                            <constraint firstItem="VVe-Uw-JpX" firstAttribute="bottom" secondItem="BJR-Wq-1yQ" secondAttribute="bottom" constant="20" id="uzh-oF-znI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VVe-Uw-JpX"/>
                     </view>
@@ -44,7 +53,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X47-rx-isc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="890" y="94"/>
+            <point key="canvasLocation" x="889.85507246376824" y="93.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="juw-nn-nGY">
@@ -67,19 +76,20 @@
         <!--Scripts Table View Controller-->
         <scene sceneID="fbo-e4-PQI">
             <objects>
-                <tableViewController id="NuM-VD-FyZ" customClass="ScriptsTableViewController" customModule="Extension" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="scriptsTable" id="NuM-VD-FyZ" customClass="ScriptsTableViewController" customModule="Extension" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8lc-px-LjT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="xAj-IT-WCc">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="scriptCell" id="xAj-IT-WCc">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xAj-IT-WCc" id="Vfp-Dh-9qr">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration" identifier="cell"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>

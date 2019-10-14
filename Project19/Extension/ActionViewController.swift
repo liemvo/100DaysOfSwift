@@ -13,9 +13,13 @@ class ActionViewController: UIViewController {
 	@IBOutlet weak var script: UITextView!
 	var pageTitle = ""
 	var pageURL = ""
-	
+	var repository: RepositoryProtocol = Repository()
+	var scripts: [URL]? = nil
+	var loadScript: URL? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
+		scripts = repository.loadScripts()
+		
 		let scriptsButton = UIBarButtonItem(title: "Scripts", style: .plain, target: self, action: #selector(selectScripts))
 		let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
 		navigationItem.setRightBarButtonItems([doneButton, scriptsButton], animated: true)
@@ -42,6 +46,21 @@ class ActionViewController: UIViewController {
 			}
 		}
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		if let savedUrl = repository.loadSaveURL(), let saveScripts = scripts {
+			if let index = saveScripts.firstIndex(where: {$0.url == savedUrl}) {
+				loadScript = saveScripts[index]
+				script.text = loadScript?.script
+			}
+		}
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		loadScript = nil
+		repository.clearLoad()
+	}
 
     @objc private func done() {
         let item = NSExtensionItem()
@@ -50,20 +69,13 @@ class ActionViewController: UIViewController {
 		let customJavaScript = NSItemProvider(item: webDictionary, typeIdentifier: kUTTypePropertyList as String)
 		item.attachments = [customJavaScript]
 
-		let userDefault = UserDefaults.standard
-		if self.pageURL.count > 0 {
-			userDefault.set(URL.init(string: script.text), forKey: self.pageURL)
-		}
-		
 		extensionContext?.completeRequest(returningItems: [item])
     }
 	
 	@objc private func selectScripts() {
-		let ac = UIAlertController(title: "Scripts", message: "", preferredStyle: .actionSheet)
-		ac.addAction(UIAlertAction(title: "Alert title", style: .default, handler: { [weak self] _ in
-			self?.script?.text = "alert(document.title);"
-		}))
-		present(ac, animated: true)
+		if let scriptsTable = storyboard?.instantiateViewController(withIdentifier: "scriptsTable") as? ScriptsTableViewController {
+            navigationController?.pushViewController(scriptsTable, animated: true)
+        }
 	}
 	
 	@objc private func adjustForKeyboard(notification: Notification) {
@@ -84,4 +96,18 @@ class ActionViewController: UIViewController {
 		script.scrollRangeToVisible(selectedRange)
 	}
 
+	@IBAction func save(_ sender: Any) {
+		if let saveScripts = scripts {
+			if let _ = saveScripts.firstIndex(where: {$0.url == pageURL}) {
+				let newScripts = saveScripts.map{ $0.url == pageURL ? $0.updateScript(script.text) : $0 }
+				repository.saveScripts(newScripts)
+			} else {
+				var newScripts = saveScripts
+				newScripts.append(URL(title: pageTitle, url: pageURL, script: script.text))
+				repository.saveScripts(newScripts)
+			}
+		} else {
+			repository.saveScripts([URL(title: pageTitle, url: pageURL, script: script.text)])
+		}
+	}
 }
