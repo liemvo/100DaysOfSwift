@@ -16,7 +16,10 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 		
 		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(registerLocal))
 		
-		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Schedule", style: .plain, target: self, action: #selector(scheduleLocal))
+		let remindMeButtonItem = UIBarButtonItem(title: "Remind", style: .plain, target: self, action: #selector(remindMeLocal))
+		let scheduleButtonItem = UIBarButtonItem(title: "Schedule", style: .plain, target: self, action: #selector(scheduleLocal))
+		navigationItem.rightBarButtonItems = [remindMeButtonItem, scheduleButtonItem]
+	
 	}
 
 	
@@ -48,11 +51,30 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 		dateComponents.hour = 10
 		dateComponents.minute = 30
 //		let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-		let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+		let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 6, repeats: false)
 		
 		let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
 		center.add(request)
 	}
+	
+	@objc private func remindMeLocal() {
+			let center = UNUserNotificationCenter.current()
+			center.removeAllPendingNotificationRequests()
+			
+			let content = UNMutableNotificationContent()
+			
+			content.title = "Remind me later"
+			content.body = "Remind me later, tomorrow"
+			
+			content.categoryIdentifier = "alarm"
+			content.userInfo = ["customData" : "fizzbuzz"]
+			content.sound = .default
+			
+			let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: false)
+			
+			let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+			center.add(request)
+		}
 	
 	private func registerCategories() {
 		let center = UNUserNotificationCenter.current()
@@ -73,14 +95,25 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 			switch response.actionIdentifier {
 			case UNNotificationDefaultActionIdentifier:
 				print("Default identifier")
+				showAction("Default identifier")
 			case "show":
 				print("show more information...")
+				showAction("Show more information...")
 			default:
 				break
 			}
 		}
 		
 		completionHandler()
+	}
+	
+	private func showAction(_ message: String) {
+		
+		let ac = UIAlertController(title: "Action", message: message, preferredStyle: .alert)
+		ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+		
+		present(ac, animated: true)
+		
 	}
 }
 
