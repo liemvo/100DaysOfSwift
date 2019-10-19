@@ -27,3 +27,4 @@
 25. [Project 19](Project19)
 26. [Project 20](Project20)
 27. [Project 21](Project21)
+28. [Day74](NotesApp)
