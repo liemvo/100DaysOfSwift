@@ -17,21 +17,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UNKNOW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEu-s0-8f2">
+                                <rect key="frame" x="124.5" y="368" width="165" height="48"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UNKNOW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80K-de-J7u">
                                 <rect key="frame" x="124.5" y="424" width="165" height="48"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tOo-Wf-ABD">
+                                <rect key="frame" x="79" y="52" width="256" height="256"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="256" id="lSd-yT-9LZ"/>
+                                    <constraint firstAttribute="width" constant="256" id="yDG-Gx-DZN"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="dEu-s0-8f2" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="O39-n6-ekR"/>
+                            <constraint firstItem="80K-de-J7u" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9oJ-eb-vDx"/>
+                            <constraint firstItem="80K-de-J7u" firstAttribute="top" secondItem="dEu-s0-8f2" secondAttribute="bottom" constant="8" id="PkR-5w-pcE"/>
+                            <constraint firstItem="80K-de-J7u" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="UZw-4o-8Td"/>
                             <constraint firstItem="dEu-s0-8f2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nps-m8-3ml"/>
+                            <constraint firstItem="tOo-Wf-ABD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vA8-Rs-l0s"/>
+                            <constraint firstItem="dEu-s0-8f2" firstAttribute="top" secondItem="tOo-Wf-ABD" secondAttribute="bottom" constant="60" id="xlm-rB-1wp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="distanceReading" destination="dEu-s0-8f2" id="dDy-Ga-5kA"/>
+                        <outlet property="imageView" destination="tOo-Wf-ABD" id="fyJ-cr-He9"/>
+                        <outlet property="secondDistanceReading" destination="80K-de-J7u" id="vkS-Mi-ovC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

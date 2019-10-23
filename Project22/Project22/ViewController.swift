@@ -10,8 +10,10 @@ import CoreLocation
 import UIKit
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
-
+	
+	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var distanceReading: UILabel!
+	@IBOutlet weak var secondDistanceReading: UILabel!
 	var locationManager: CLLocationManager?
 	
 	override func viewDidLoad() {
@@ -21,9 +23,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 		locationManager?.requestAlwaysAuthorization()
 		
 		view.backgroundColor = .gray
+		self.imageView.layer.cornerRadius = 128
+		
 	}
-
-
+	
+	
 	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
 		if status == .authorizedAlways {
 			if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
@@ -43,34 +47,72 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 		locationManager?.startRangingBeacons(in: beaconRegion)
 	}
 	
-	func update(distance: CLProximity) {
+	func update(distance: CLProximity, label: UILabel) {
 		UIView.animate(withDuration: 1) {
+			var scale: Float = 0.001
 			switch distance {
 			case .unknown:
 				self.view.backgroundColor = .gray
-				self.distanceReading.text = "UNKNOWN"
+				label.text = "UNKNOWN"
+				scale = 0.001
 			case .far:
 				self.view.backgroundColor = .blue
-				self.distanceReading.text = "FAR"
+				label.text = "FAR"
+				scale = 0.25
 			case .near:
 				self.view.backgroundColor = .orange
-				self.distanceReading.text = "NEAR"
+				label.text = "NEAR"
+				scale = 0.5
 			case .immediate:
 				self.view.backgroundColor = .red
-				self.distanceReading.text = "RIGHT HERE"
+				label.text = "RIGHT HERE"
+				scale = 1.0
 			@unknown default:
 				self.view.backgroundColor = .black
-				self.distanceReading.text = "WHOA!"
+				label.text = "WHOA!"
+			}
+			label.isHidden = true
+			UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: {
+				self.imageView.transform = CGAffineTransform(scaleX: CGFloat(scale), y: CGFloat(scale))
+			}) { _ in
+				label.isHidden = false
 			}
 		}
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
-		if let beacon  = beacons.first {
-			update(distance: beacon.proximity)
+		if let beacon = beacons.first{
+			update(distance: beacon.proximity, label: self.distanceReading)
+			if beacons.count >= 2 {
+				if let beacon2 = beacons[1] as? CLBeacon {
+					update(distance: beacon2.proximity, label: self.secondDistanceReading)
+				} else {
+					update(distance: .unknown, label: secondDistanceReading)
+				}
+			} else {
+				update(distance: .unknown, label: secondDistanceReading)
+			}
+			
+			showFirstBeacons()
 		} else {
-			update(distance: .unknown)
+			update(distance: .unknown, label: secondDistanceReading)
+			update(distance: .unknown, label: distanceReading)
+			
 		}
+	}
+	
+	private func showFirstBeacons() {
+		let userDefault = UserDefaults.standard
+		let isFirsBeatcon = userDefault.bool(forKey: "isFirsBeatcon")
+		
+		if (!isFirsBeatcon) {
+			let ac = UIAlertController(title: "First beacon is appear", message: nil, preferredStyle: .alert)
+			ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (alert: UIAlertAction!) in
+				userDefault.set(true, forKey: "isFirsBeatcon")
+			}))
+			present(ac, animated: true)
+		}
+		
 	}
 }
 
