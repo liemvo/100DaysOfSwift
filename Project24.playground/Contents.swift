@@ -45,3 +45,41 @@ extension String {
 	}
 }
 
+extension UIView {
+	func bounceOut(duration: TimeInterval) {
+		UIView.animate(withDuration: duration) { [unowned self] in
+			self.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
+		}
+	}
+}
+
+extension Int {
+	func times(closure: () -> Void) {
+		guard self > 0 else { return }
+		for _ in 0 ..< self {
+			closure()
+		}
+	}
+}
+
+extension Array where Element: Comparable {
+	mutating func remove(item: Element){
+		if let location = self.firstIndex(of: item)  {
+			self.remove(at: location)
+		}
+	}
+}
+
+let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 60))
+view.backgroundColor = .blue
+view.bounceOut(duration: 24.0)
+
+
+5.times {
+	print("hello there")
+}
+
+var numbers = [4, 5, 6, 4, 9, 2]
+
+numbers.remove(item: 4)
+

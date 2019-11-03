@@ -115,4 +115,3 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 		
 	}
 }
-
