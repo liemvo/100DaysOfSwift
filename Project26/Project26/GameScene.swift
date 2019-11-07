@@ -15,6 +15,7 @@ enum CollisionTypes: UInt32 {
 	case star = 4
 	case vortex = 8
 	case finish = 16
+	case teleport = 32
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -82,7 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 				if letter == "x" {
 					addBlockNode(at: position, name: "block")
 				}  else if letter == "t" {
-					addGameNode(at: position, name: "teleport", bitmask: 32)
+					addGameNode(at: position, name: "teleport", bitmask: CollisionTypes.vortex.rawValue)
 				} else if letter == "v" {
 					addGameNode(at: position, name: "vortex", bitmask: CollisionTypes.vortex.rawValue)
 				} else if letter == "s" {
@@ -131,7 +132,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		player.physicsBody?.linearDamping = 0.5
 		
 		player.physicsBody?.categoryBitMask = CollisionTypes.player.rawValue
-		player.physicsBody?.contactTestBitMask = CollisionTypes.star.rawValue | CollisionTypes.vortex.rawValue | CollisionTypes.finish.rawValue
+		player.physicsBody?.contactTestBitMask = CollisionTypes.star.rawValue | CollisionTypes.vortex.rawValue | CollisionTypes.finish.rawValue | CollisionTypes.teleport.rawValue
 		
 		player.physicsBody?.collisionBitMask = CollisionTypes.wall.rawValue
 		addChild(player)
