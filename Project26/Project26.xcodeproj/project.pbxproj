@@ -15,6 +15,7 @@
 		443AA7FF2372902A00DD7E91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 443AA7FE2372902A00DD7E91 /* Assets.xcassets */; };
 		443AA8022372902A00DD7E91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 443AA8002372902A00DD7E91 /* LaunchScreen.storyboard */; };
 		443AA80A237290C000DD7E91 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 443AA809237290C000DD7E91 /* level1.txt */; };
+		443AA82E2373F20C00DD7E91 /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 443AA82D2373F20C00DD7E91 /* level2.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		443AA8012372902A00DD7E91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		443AA8032372902A00DD7E91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		443AA809237290C000DD7E91 /* level1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
+		443AA82D2373F20C00DD7E91 /* level2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				443AA8002372902A00DD7E91 /* LaunchScreen.storyboard */,
 				443AA8032372902A00DD7E91 /* Info.plist */,
 				443AA809237290C000DD7E91 /* level1.txt */,
+				443AA82D2373F20C00DD7E91 /* level2.txt */,
 			);
 			path = Project26;
 			sourceTree = "<group>";
@@ -133,6 +136,7 @@
 			files = (
 				443AA80A237290C000DD7E91 /* level1.txt in Resources */,
 				443AA7FD2372902900DD7E91 /* Main.storyboard in Resources */,
+				443AA82E2373F20C00DD7E91 /* level2.txt in Resources */,
 				443AA7F42372902900DD7E91 /* GameScene.sks in Resources */,
 				443AA7FF2372902A00DD7E91 /* Assets.xcassets in Resources */,
 				443AA8022372902A00DD7E91 /* LaunchScreen.storyboard in Resources */,
