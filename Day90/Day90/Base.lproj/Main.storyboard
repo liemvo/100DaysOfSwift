@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KfO-ED-gfm">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Day90-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Day90" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kwE-8R-hcV">
+                                <rect key="frame" x="0.0" y="108" width="414" height="692"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qX2-n6-L6b">
+                                <rect key="frame" x="152" y="816" width="110" height="30"/>
+                                <state key="normal" title="Set Top Text"/>
+                                <connections>
+                                    <action selector="setTopText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dHZ-Ru-6Fj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWk-Ch-tDk">
+                                <rect key="frame" x="270" y="816" width="110" height="30"/>
+                                <state key="normal" title="Set Bottom Text"/>
+                                <connections>
+                                    <action selector="setBottomText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CxP-hg-PFL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Thv-p8-Lsx">
+                                <rect key="frame" x="34" y="816" width="110" height="30"/>
+                                <state key="normal" title="Import Picture"/>
+                                <connections>
+                                    <action selector="importPicture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uLk-h1-fP1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Thv-p8-Lsx" firstAttribute="width" secondItem="qX2-n6-L6b" secondAttribute="width" id="0dn-5F-zIp"/>
+                            <constraint firstItem="kwE-8R-hcV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="2MI-jH-z28"/>
+                            <constraint firstItem="jWk-Ch-tDk" firstAttribute="leading" secondItem="qX2-n6-L6b" secondAttribute="trailing" constant="8" symbolic="YES" id="6Wh-VP-RhR"/>
+                            <constraint firstItem="qX2-n6-L6b" firstAttribute="width" secondItem="jWk-Ch-tDk" secondAttribute="width" id="7Pw-Io-mXR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jWk-Ch-tDk" secondAttribute="bottom" constant="16" id="8Pi-bC-GRa"/>
+                            <constraint firstItem="Thv-p8-Lsx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="G9U-gs-yfG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qX2-n6-L6b" secondAttribute="bottom" constant="16" id="Ycz-n0-fZo"/>
+                            <constraint firstItem="kwE-8R-hcV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kCT-SK-hva"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Thv-p8-Lsx" secondAttribute="bottom" constant="16" id="q2X-kT-fs8"/>
+                            <constraint firstItem="qX2-n6-L6b" firstAttribute="leading" secondItem="Thv-p8-Lsx" secondAttribute="trailing" constant="8" id="svu-xM-AeJ"/>
+                            <constraint firstItem="kwE-8R-hcV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="yph-a5-6ak"/>
+                            <constraint firstItem="Thv-p8-Lsx" firstAttribute="top" secondItem="kwE-8R-hcV" secondAttribute="bottom" constant="16" id="z4y-gr-X2k"/>
+                            <constraint firstItem="qX2-n6-L6b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zO8-P7-Fsw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Day90" id="k8c-EG-gLc"/>
+                    <connections>
+                        <outlet property="imageView" destination="kwE-8R-hcV" id="vYt-fU-KWv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="138.61607142857142"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="waA-i5-PcJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KfO-ED-gfm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rf0-Jf-1pY">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="KRl-eP-rAd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vaB-5n-0ww" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="138.61607142857142"/>
+        </scene>
+    </scenes>
+</document>
