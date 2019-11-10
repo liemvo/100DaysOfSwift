@@ -9,22 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+	
 	@IBOutlet weak var imageView: UIImageView!
-	private var currentDrawType = 0
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		drawRectangle()
 	}
-
-	@IBAction func redrawTapped(_ sender: Any) {
-		currentDrawType += 1
-		if currentDrawType > 5 {
-			currentDrawType = 0
-		}
+	
+	@IBAction func redrawTapped(_ sender: UIButton) {
 		
-		switch currentDrawType {
+		switch sender.tag {
 		case 0:
 			drawRectangle()
 		case 1:
@@ -37,6 +32,10 @@ class ViewController: UIViewController {
 			drawLines()
 		case 5:
 			drawImagesAndText()
+		case 6:
+			drawEmoj()
+		case 7:
+			drawTwin()
 		default:
 			drawRectangle()
 		}
@@ -153,6 +152,89 @@ class ViewController: UIViewController {
 			let mouse = UIImage(named: "mouse")
 			
 			mouse?.draw(at: CGPoint(x: 300, y: 150))
+		}
+		
+		imageView.image = image
+	}
+	
+	private func drawEmoj() {
+		let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+		let image = renderer.image { context in
+			let paragraphStyle = NSMutableParagraphStyle()
+			paragraphStyle.alignment = .center
+			
+			let attrs: [NSAttributedString.Key: Any] = [
+				.font: UIFont.systemFont(ofSize: 256),
+				.paragraphStyle: paragraphStyle
+			]
+			let string = "⭐️"
+			
+			let attributedString = NSAttributedString(string: string, attributes: attrs)
+			
+			attributedString.draw(with: CGRect(x: 32, y: 32, width: 448, height: 448), options: .usesLineFragmentOrigin, context: nil)
+			
+		}
+		
+		imageView.image = image
+	}
+	
+	private func drawTwin() {
+		let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+		let image = renderer.image { context in
+			context.cgContext.translateBy(x: 128, y: 256)
+			let length: CGFloat = 100
+			var currentX: CGFloat = 0
+			
+			for index in 0 ..< 15 {
+				if index == 0 { // start T
+					context.cgContext.move(to: CGPoint(x: currentX, y: 0))
+				} else if index == 1 {
+					currentX = length
+					context.cgContext.addLine(to: CGPoint(x: currentX, y: 0))
+				} else if index == 2 {
+					currentX = length / 2
+					context.cgContext.move(to: CGPoint(x: currentX, y: 0))
+				} else if index == 3 {
+					context.cgContext.addLine(to: CGPoint(x: currentX , y: length))
+					// finish T
+				} else if index == 4 { // start W
+					currentX += length / 2 + 5
+					context.cgContext.move(to: CGPoint(x: currentX, y: 0))
+				}  else if index == 5 {
+					currentX += length / 3
+					context.cgContext.addLine(to: CGPoint(x: currentX , y: length))
+				} else if index == 6 {
+					currentX += length / 3
+					context.cgContext.addLine(to: CGPoint(x: currentX, y: 0))
+				} else if index == 7 {
+					currentX += length / 3
+					context.cgContext.addLine(to: CGPoint(x: currentX , y: length))
+				} else if index == 8 {
+					currentX += length / 3
+					context.cgContext.addLine(to: CGPoint(x: currentX, y: 0))
+					// finish W
+				} else if index == 9 { // start I
+					currentX += 5
+					context.cgContext.move(to: CGPoint(x: currentX, y: 0))
+				} else if index == 10 {
+					context.cgContext.addLine(to: CGPoint(x: currentX, y: length))
+					// finish I
+				} else if index == 11 {
+					currentX += 5
+					context.cgContext.move(to: CGPoint(x: currentX, y: length))
+				} else if index == 12 {
+					context.cgContext.addLine(to: CGPoint(x: currentX, y: 0))
+				} else if index == 13 {
+					currentX += length / 2
+					context.cgContext.addLine(to: CGPoint(x: currentX, y: length))
+				} else if index == 14 {
+					context.cgContext.addLine(to: CGPoint(x: currentX, y: 0))
+				}
+				
+			}
+			
+			context.cgContext.setStrokeColor(UIColor.black.cgColor)
+			context.cgContext.strokePath()
 		}
 		
 		imageView.image = image
