@@ -32,3 +32,7 @@
 30. [Project 23](Project23.playground)
 31. [Project 24](Project24)
 32. [Project 25](Project25)
+33. [Project 26](Project26)
+34. [Project 27](Project27)
+35. [Day90](Day90)
+36. [Project 28](Project28)
