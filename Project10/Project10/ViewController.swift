@@ -6,30 +6,41 @@
 //  Copyright © 2019 Liem Vo. All rights reserved.
 //
 
+import LocalAuthentication
 import UIKit
 
 class ViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-	var people = [Person]()
 	
+	private var people = [Person]()
+	private var renderedPeople = [Person]()
+	private var saveButton: UIBarButtonItem!
+	private var authenticate: UIBarButtonItem!
+	private var addButton: UIBarButtonItem!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
-		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewPerson))
+		addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewPerson))
+		navigationItem.leftBarButtonItem = addButton
 		
+		saveButton = UIBarButtonItem(title: "Lock", style: .done, target: self, action: #selector(lockScreen))
+		authenticate = UIBarButtonItem(title: "Authorize", style: .done, target: self, action: #selector(authorize))
+		
+		lockScreen()
+		
+		let notificationCenter = NotificationCenter.default
+		notificationCenter.addObserver(self, selector: #selector(lockScreen), name: UIApplication.willResignActiveNotification, object: nil)
 	}
-
+	
 	
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return people.count
+		return renderedPeople.count
 	}
 	
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Person", for: indexPath) as? PersonCell else {
 			fatalError("Unable to dequeue PersonCell.")
 		}
-		let person = people[indexPath.row]
-		
+		let person = renderedPeople[indexPath.row]
 		
 		cell.name.text = person.name
 		
@@ -45,13 +56,14 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
 	}
 	
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let person = people[indexPath.item]
+		let person = renderedPeople[indexPath.item]
 		
 		let ac = UIAlertController(title: "Rename or Delete", message: nil, preferredStyle: .alert)
 		ac.addAction(UIAlertAction(title: "Rename", style: .default, handler: { (alert: UIAlertAction!) in
 			self.renamePerson(person: person)
 		}))
 		ac.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (alert: UIAlertAction!) in
+			self.renderedPeople.remove(at: indexPath.row)
 			self.people.remove(at: indexPath.row)
 			self.collectionView.reloadData()
 		}))
@@ -71,6 +83,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
 		
 		let person = Person(name: "Unknow", image: imageName)
 		people.append(person)
+		renderedPeople.append(person)
 		collectionView.reloadData()
 		
 		dismiss(animated: true)
@@ -105,6 +118,49 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
 		})
 		
 		present(ac, animated: true)
+	}
+	
+	@objc private func lockScreen() {
+		renderedPeople = []
+		self.collectionView.reloadData()
+		
+		navigationItem.leftBarButtonItem = nil
+		navigationItem.rightBarButtonItem = authenticate
+	}
+	
+	private func unlock() {
+		renderedPeople = people
+		self.collectionView.reloadData()
+		navigationItem.leftBarButtonItem = addButton
+		navigationItem.rightBarButtonItem = saveButton
+	}
+	
+	@objc private func authorize() {
+		let context = LAContext()
+		var error: NSError?
+		
+		if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+			let reason = "Identify yourself!"
+			
+			context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] (success, authenticationError) in
+				DispatchQueue.main.async {
+					if success {
+						self?.unlock()
+					} else {
+						let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
+						ac.addAction(UIAlertAction(title: "OK", style: .default))
+						self?.present(ac, animated: true)
+					}
+				}
+			}
+		} else {
+			// no biometry
+			
+			let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication.", preferredStyle: .alert)
+			ac.addAction(UIAlertAction(title: "OK", style: .default))
+			self.present(ac, animated: true)
+			
+		}
 	}
 }
 

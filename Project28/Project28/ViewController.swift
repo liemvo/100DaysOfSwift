@@ -10,17 +10,25 @@ import LocalAuthentication
 import UIKit
 
 class ViewController: UIViewController {
-
+	private var saveButton: UIBarButtonItem!
+	private var createButton: UIBarButtonItem!
+	
+	@IBOutlet weak var authenticateButton: UIButton!
+	@IBOutlet weak var passwordField: UITextField!
+	@IBOutlet weak var confirmButton: UIButton!
 	@IBOutlet weak var secret: UITextView!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
+		showOrHidePasswordForm(isShown: false)
+		createButton = UIBarButtonItem(title: "Create", style: .done, target: self, action: #selector(createPassword))
+		saveButton = UIBarButtonItem(title: "Lock", style: .done, target: self, action: #selector(saveSecretMessage))
 		let notificationCenter = NotificationCenter.default
 		notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
 		notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 		notificationCenter.addObserver(self, selector: #selector(saveSecretMessage), name: UIApplication.willResignActiveNotification, object: nil)
 	}
-
+	
 	@IBAction func authenticateTapped(_ sender: Any) {
 		let context = LAContext()
 		var error: NSError?
@@ -41,10 +49,13 @@ class ViewController: UIViewController {
 			}
 		} else {
 			// no biometry
-			
-			let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication.", preferredStyle: .alert)
-			ac.addAction(UIAlertAction(title: "OK", style: .default))
-			self.present(ac, animated: true)
+			if KeychainWrapper.standard.string(forKey: "SecretPassword")?.count ?? 0 > 5 {
+				showOrHidePasswordForm(isShown: true)
+			} else {
+				let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication.", preferredStyle: .alert)
+				ac.addAction(UIAlertAction(title: "OK", style: .default))
+				self.present(ac, animated: true)
+			}
 		}
 	}
 	
@@ -66,6 +77,8 @@ class ViewController: UIViewController {
 	}
 	
 	private func unlockSecretMessage() {
+		navigationItem.rightBarButtonItem = saveButton
+		navigationItem.leftBarButtonItem  = createButton
 		secret.isHidden = false
 		title = "Secret stuff!"
 		
@@ -74,10 +87,42 @@ class ViewController: UIViewController {
 	
 	@objc private func saveSecretMessage() {
 		guard secret.isHidden == false else { return }
+		navigationItem.rightBarButtonItem = nil
+		navigationItem.leftBarButtonItem = nil
 		KeychainWrapper.standard.set(secret.text, forKey: "SecretMessage")
 		secret.resignFirstResponder()
 		secret.isHidden = true
 		title = "Nothing to see here"
+	}
+	
+	@objc private func createPassword() {
+		if let passwordController = storyboard?.instantiateViewController(withIdentifier: "passwordView") as? PasswordViewController {
+			navigationController?.pushViewController(passwordController, animated: true)
+		}
+	}
+	
+	
+	@IBAction func confirmTapped(_ sender: Any) {
+		guard let savePassword = KeychainWrapper.standard.string(forKey: "SecretPassword"), savePassword.count > 5, savePassword == passwordField.text else {
+			
+			passwordField.text = ""
+			
+			let ac = UIAlertController(title: "Wrong password", message: "You have enter wrong password!!!", preferredStyle: .alert)
+			ac.addAction(UIAlertAction(title: "OK", style: .default))
+			self.present(ac, animated: true)
+			return
+		}
+		
+		passwordField.text = ""
+		showOrHidePasswordForm(isShown: false)
+		unlockSecretMessage()
+	}
+	
+	private func showOrHidePasswordForm(isShown: Bool) {
+		self.passwordField.isHidden = !isShown
+		self.confirmButton.isHidden = !isShown
+		
+		self.authenticateButton.isHidden = isShown
 	}
 }
 

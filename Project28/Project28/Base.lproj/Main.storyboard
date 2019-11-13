@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ri3-XP-NNg">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,6 +23,18 @@
                                     <action selector="authenticateTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ieU-8o-1ZZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBR-ze-AHv">
+                                <rect key="frame" x="179.5" y="343" width="55" height="30"/>
+                                <state key="normal" title="Confirm"/>
+                                <connections>
+                                    <action selector="confirmTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EML-q4-HkN"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FCN-5r-Opo">
+                                <rect key="frame" x="32" y="293" width="350" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ca9-Ta-a9R">
                                 <rect key="frame" x="0.0" y="88" width="414" height="788"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -33,22 +46,64 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="rpm-7K-rPD" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="IfG-SW-hOU"/>
+                            <constraint firstItem="CBR-ze-AHv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LAA-Mp-8IO"/>
                             <constraint firstAttribute="bottom" secondItem="ca9-Ta-a9R" secondAttribute="bottom" constant="20" symbolic="YES" id="P83-hw-YC2"/>
                             <constraint firstItem="ca9-Ta-a9R" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ryv-ld-OG6"/>
                             <constraint firstItem="ca9-Ta-a9R" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="T8M-Oz-zRO"/>
                             <constraint firstItem="rpm-7K-rPD" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="bbh-0O-N04"/>
+                            <constraint firstItem="FCN-5r-Opo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="205" id="gul-PQ-EDg"/>
+                            <constraint firstItem="CBR-ze-AHv" firstAttribute="top" secondItem="FCN-5r-Opo" secondAttribute="bottom" constant="16" id="jUd-Jh-BB5"/>
+                            <constraint firstItem="FCN-5r-Opo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="pvi-Mg-PCl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FCN-5r-Opo" secondAttribute="trailing" constant="32" id="q0y-dE-e2T"/>
                             <constraint firstItem="ca9-Ta-a9R" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="rAn-A9-7dO"/>
+                            <constraint firstItem="CBR-ze-AHv" firstAttribute="top" secondItem="FCN-5r-Opo" secondAttribute="bottom" constant="16" id="s8y-8g-XXR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Xaf-S6-Gjv"/>
                     <connections>
+                        <outlet property="authenticateButton" destination="rpm-7K-rPD" id="nVD-RL-4rY"/>
+                        <outlet property="confirmButton" destination="CBR-ze-AHv" id="ctB-68-lhL"/>
+                        <outlet property="passwordField" destination="FCN-5r-Opo" id="Toe-4r-wWP"/>
                         <outlet property="secret" destination="ca9-Ta-a9R" id="d1N-PI-Dsx"/>
+                        <segue destination="zrn-MI-9il" kind="show" id="eRY-QO-TWW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="138.61607142857142"/>
+        </scene>
+        <!--Password View Controller-->
+        <scene sceneID="rJU-yw-Bob">
+            <objects>
+                <viewController storyboardIdentifier="passwordView" id="zrn-MI-9il" customClass="PasswordViewController" customModule="Project28" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LUB-Mf-Yip">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Passcode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yUy-VZ-WRP">
+                                <rect key="frame" x="10" y="136" width="394" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="yUy-VZ-WRP" firstAttribute="centerX" secondItem="LUB-Mf-Yip" secondAttribute="centerX" id="JFQ-ww-IWX"/>
+                            <constraint firstItem="5hu-6K-gP4" firstAttribute="trailing" secondItem="yUy-VZ-WRP" secondAttribute="trailing" constant="10" id="RrY-1U-F3P"/>
+                            <constraint firstItem="yUy-VZ-WRP" firstAttribute="leading" secondItem="5hu-6K-gP4" secondAttribute="leading" constant="10" id="soe-Oa-da2"/>
+                            <constraint firstItem="yUy-VZ-WRP" firstAttribute="top" secondItem="5hu-6K-gP4" secondAttribute="top" constant="48" id="xKJ-rD-hTU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5hu-6K-gP4"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Zjb-zO-H0v"/>
+                    <connections>
+                        <outlet property="passwordField" destination="yUy-VZ-WRP" id="73X-h7-IOW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MiV-1f-WyO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1882.608695652174" y="130.58035714285714"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="spg-i6-b67">

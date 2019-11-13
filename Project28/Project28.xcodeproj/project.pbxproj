@@ -14,6 +14,7 @@
 		445D35C0237A76A9002F57FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 445D35BE237A76A9002F57FD /* LaunchScreen.storyboard */; };
 		445D35C9237A7A78002F57FD /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445D35C7237A7A78002F57FD /* KeychainWrapper.swift */; };
 		445D35CA237A7A78002F57FD /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445D35C8237A7A78002F57FD /* KeychainItemAccessibility.swift */; };
+		44AA72C7237BD1A6001CB511 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AA72C6237BD1A6001CB511 /* PasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		445D35C1237A76A9002F57FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		445D35C7237A7A78002F57FD /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		445D35C8237A7A78002F57FD /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
+		44AA72C6237BD1A6001CB511 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				445D35BC237A76A9002F57FD /* Assets.xcassets */,
 				445D35BE237A76A9002F57FD /* LaunchScreen.storyboard */,
 				445D35C1237A76A9002F57FD /* Info.plist */,
+				44AA72C6237BD1A6001CB511 /* PasswordViewController.swift */,
 			);
 			path = Project28;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				445D35C9237A7A78002F57FD /* KeychainWrapper.swift in Sources */,
+				44AA72C7237BD1A6001CB511 /* PasswordViewController.swift in Sources */,
 				445D35CA237A7A78002F57FD /* KeychainItemAccessibility.swift in Sources */,
 				445D35B8237A76A9002F57FD /* ViewController.swift in Sources */,
 				445D35B4237A76A9002F57FD /* AppDelegate.swift in Sources */,
@@ -291,6 +295,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X3FGZM4HB9;
 				INFOPLIST_FILE = Project28/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -309,6 +314,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X3FGZM4HB9;
 				INFOPLIST_FILE = Project28/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
