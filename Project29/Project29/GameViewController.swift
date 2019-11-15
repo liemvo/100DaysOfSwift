@@ -12,7 +12,7 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 
-	private var currentGame: GameScene?
+	var currentGame: GameScene?
 	
 	
 	@IBOutlet weak var angleLabel: UILabel!
