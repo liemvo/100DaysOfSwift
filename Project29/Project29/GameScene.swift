@@ -22,8 +22,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	
 	private var player1: SKSpriteNode!
 	private var messageLabel: SKLabelNode!
-	var player2: SKSpriteNode!
-	var banana: SKSpriteNode!
+	private var player2: SKSpriteNode!
+	private var banana: SKSpriteNode!
 	
 	private var gameOver: SKLabelNode!
 	private var player1Score = 0 {
@@ -83,6 +83,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 			messageLabel.removeFromParent()
 			messageLabel = nil
 			currentPlayer = 1
+			
+			createNewSence()
 		}
 		let speed = Double(velocity) / 10
 		
