@@ -21,6 +21,7 @@ class GameViewController: UIViewController {
 	@IBOutlet weak var velocityLabel: UILabel!
 	@IBOutlet weak var launchButton: UIButton!
 	@IBOutlet weak var playerNumber: UILabel!
+	@IBOutlet weak var speedLabel: UILabel!
 	override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +45,7 @@ class GameViewController: UIViewController {
 		
 		angleChanged(self)
 		velocityChanged(self)
+		currentGame?.createSpeed()
     }
 
     override var shouldAutorotate: Bool {

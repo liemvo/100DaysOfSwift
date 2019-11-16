@@ -19,19 +19,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	
 	private var buildings = [BuildingNode]()
 	weak var viewController: GameViewController?
-
-	var player1: SKSpriteNode!
+	
+	private var player1: SKSpriteNode!
+	private var messageLabel: SKLabelNode!
 	var player2: SKSpriteNode!
 	var banana: SKSpriteNode!
-
-	var currentPlayer = 1
+	
+	private var gameOver: SKLabelNode!
+	private var player1Score = 0 {
+		didSet {
+			isGameOver = self.player2Score >= 3 || self.player1Score >= 3
+		}
+	}
+	private var player2Score = 0 {
+		didSet {
+			isGameOver = self.player2Score >= 3 || self.player1Score >= 3
+		}
+	}
+	
+	private var currentPlayer = 1
+	
+	private var isGameOver: Bool = false
+	
 	override func didMove(to view: SKView) {
 		backgroundColor = UIColor(hue: 0.669, saturation: 0.99, brightness: 0.67, alpha: 1)
 		
 		createBuildings()
 		createPlayers()
-		
 		physicsWorld.contactDelegate = self
+	}
+	
+	func createSpeed() {
+		let speed = CGFloat.random(in: 0.5 ... 2.0)
+		physicsWorld.speed = speed
+		viewController?.speedLabel.isHidden = false
+		viewController?.speedLabel.text = "Speed: \(speed) m/s"
 	}
 	
 	private func createBuildings() {
@@ -52,6 +74,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	}
 	
 	func launch(angle: Int, velocity: Int) {
+		if isGameOver {
+			self.player1Score = 0
+			self.player2Score = 0
+			viewController?.launchButton.setTitle("Launch", for: .normal)
+			gameOver.removeFromParent()
+			gameOver = nil
+			messageLabel.removeFromParent()
+			messageLabel = nil
+			currentPlayer = 1
+		}
 		let speed = Double(velocity) / 10
 		
 		let radians = deg2rad(degrees: angle)
@@ -154,10 +186,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		}
 		
 		if firstNode.name == "banana" && secondNode.name == "player1" {
+			player2Score += 1
 			destroy(player: player1)
 		}
 		
 		if firstNode.name == "banana" && secondNode.name == "player2" {
+			player1Score += 1
 			destroy(player: player2)
 		}
 	}
@@ -171,16 +205,60 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		player.removeFromParent()
 		banana.removeFromParent()
 		
-		DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-			let newGame = GameScene(size: self.size)
-			newGame.viewController = self.viewController
-			self.viewController?.currentGame = newGame
-			self.changePlayer()
-			newGame.currentPlayer = self.currentPlayer
-			
-			let transition = SKTransition.doorway(withDuration: 1.5)
-			self.view?.presentScene(newGame, transition: transition)
+		if (isGameOver) {
+			createGameOver()
+			self.viewController?.speedLabel.isHidden = true
 		}
+		DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+			if (!self.isGameOver) {
+				self.createNewSence()
+			}
+		}
+	}
+	
+	private func createNewSence() {
+		
+		let newGame = GameScene(size: self.size)
+		newGame.viewController = self.viewController
+		self.viewController?.currentGame = newGame
+		self.changePlayer()
+		newGame.currentPlayer = self.currentPlayer
+		newGame.player1Score = self.player1Score
+		newGame.player2Score = self.player2Score
+		newGame.createSpeed()
+		let transition = SKTransition.doorway(withDuration: 1.5)
+		self.view?.presentScene(newGame, transition: transition)
+	}
+	
+	private func createGameOver() {
+		
+		let fontFace = "Chalkduster"
+		
+		gameOver = SKLabelNode(fontNamed: fontFace)
+		gameOver.horizontalAlignmentMode = .center
+		gameOver.fontSize = 64
+		gameOver.text = "Game Over"
+		gameOver.zPosition = 5
+		addChild(gameOver)
+		gameOver.position = CGPoint(x: 560, y: 400)
+		
+		
+		let win: String
+		if player1Score >= 3 {
+			win = "Player1"
+		} else {
+			win = "Player2"
+		}
+		messageLabel = SKLabelNode(fontNamed: fontFace)
+        messageLabel.text = "\(win) is a winner!"
+        messageLabel.position = CGPoint(x: 512, y: 320)
+        messageLabel.zPosition = 999
+        messageLabel.horizontalAlignmentMode = .center
+        messageLabel.fontSize = 22
+        addChild(messageLabel)
+		
+		viewController?.launchButton.isHidden = false
+		viewController?.launchButton.setTitle("Restart", for: .normal)
 	}
 	
 	private func bananaHit(building: SKNode, atPoint contactPoint: CGPoint) {
