@@ -132,9 +132,6 @@ class SelectionViewController: UITableViewController {
 						}
 					}
 				}
-				DispatchQueue.main.async {
-					self?.tableView.reloadData()
-				}
 			}
 		}
 	}
