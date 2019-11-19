@@ -12,6 +12,8 @@
 		442B4B1923828C5400BD6302 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 442B4B1723828C5400BD6302 /* Main.storyboard */; };
 		442B4B1B23828C5500BD6302 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 442B4B1A23828C5500BD6302 /* Assets.xcassets */; };
 		442B4B1E23828C5500BD6302 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 442B4B1C23828C5500BD6302 /* LaunchScreen.storyboard */; };
+		442B4B282383B63F00BD6302 /* Coutry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442B4B272383B63F00BD6302 /* Coutry.swift */; };
+		442B4B2A2383B72400BD6302 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 442B4B292383B72400BD6302 /* countries.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		442B4B1A23828C5500BD6302 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		442B4B1D23828C5500BD6302 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		442B4B1F23828C5500BD6302 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		442B4B272383B63F00BD6302 /* Coutry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coutry.swift; sourceTree = "<group>"; };
+		442B4B292383B72400BD6302 /* countries.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				442B4B1A23828C5500BD6302 /* Assets.xcassets */,
 				442B4B1C23828C5500BD6302 /* LaunchScreen.storyboard */,
 				442B4B1F23828C5500BD6302 /* Info.plist */,
+				442B4B272383B63F00BD6302 /* Coutry.swift */,
+				442B4B292383B72400BD6302 /* countries.json */,
 			);
 			path = MemoryGame;
 			sourceTree = "<group>";
@@ -124,6 +130,7 @@
 			files = (
 				442B4B1E23828C5500BD6302 /* LaunchScreen.storyboard in Resources */,
 				442B4B1B23828C5500BD6302 /* Assets.xcassets in Resources */,
+				442B4B2A2383B72400BD6302 /* countries.json in Resources */,
 				442B4B1923828C5400BD6302 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				442B4B1623828C5400BD6302 /* ViewController.swift in Sources */,
+				442B4B282383B63F00BD6302 /* Coutry.swift in Sources */,
 				442B4B1223828C5400BD6302 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
