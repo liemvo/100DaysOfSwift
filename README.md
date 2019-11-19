@@ -36,3 +36,7 @@
 34. [Project 27](Project27)
 35. [Day90](Day90)
 36. [Project 28](Project28)
+37. [Project 29](Project29)
+38. [Project 30](Project30)
+39. [Day 99](MemoryGame)
+
